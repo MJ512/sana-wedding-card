@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>S. Sana & M. S. Mohamed Najith — Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ivory: #faf7f2;
+    --ivory-dark: #f3ede3;
+    --champagne: #e8d9c0;
+    --blush: #e4c5b5;
+    --blush-light: #edd9cf;
+    --gold: #c9a96e;
+    --gold-light: #dfc08a;
+    --brown-soft: #8a6f5b;
+    --text-primary: #2c2118;
+    --text-secondary: #6b5744;
+    --text-muted: #8a6f5b;          /* Already fixed for visibility */
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Jost', sans-serif;
+  }
+
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ivory);
+    color: var(--text-primary);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.35;
+    pointer-events: none;
+    z-index: 1000;
+  }
+
+  .scroll-progress {
+    position: fixed;
+    top: 0; left: 0;
+    height: 1px;
+    background: linear-gradient(90deg, var(--blush), var(--gold));
+    z-index: 900;
+    width: 0%;
+    transition: width 0.1s linear;
+  }
+
+  #hero {
+    height: 100vh;
+    min-height: 680px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #fdf9f4 0%, #f5e9db 40%, #ede0d2 100%);
+  }
+
+  .hero-bg-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+  }
+
+  .hero-bg-circle.c1 {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(228,197,181,0.35) 0%, transparent 70%);
+    top: -10%; left: -10%;
+    animation: floatA 18s ease-in-out infinite;
+  }
+
+  .hero-bg-circle.c2 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(201,169,110,0.18) 0%, transparent 70%);
+    bottom: -5%; right: -5%;
+    animation: floatB 22s ease-in-out infinite;
+  }
+
+  .hero-bg-circle.c3 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(237,217,207,0.4) 0%, transparent 70%);
+    top: 30%; left: 55%;
+    animation: floatC 15s ease-in-out infinite;
+  }
+
+  @keyframes floatA { 0%,100%{transform:translate(0,0)} 50%{transform:translate(30px,-40px)} }
+  @keyframes floatB { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-25px,35px)} }
+  @keyframes floatC { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-20px,20px)} }
+
+  .floral-tl, .floral-br {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+  .floral-tl { top: 0; left: 0; transform: translate(-20px,-20px); }
+  .floral-br { bottom: 0; right: 0; transform: translate(20px,20px) rotate(180deg); }
+  body.loaded .floral-tl,
+  body.loaded .floral-br { opacity: 0.1; }
+
+  .hero-content {
+    text-align: center;
+    z-index: 2;
+    position: relative;
+    padding: 0 2rem;
+    max-width: 980px;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1);
+    transition-delay: 0.4s;
+  }
+  body.loaded .hero-content { opacity: 1; transform: translateY(0); }
+
+  .hero-eyebrow {
+    font-family: var(--sans);
+    font-weight: 200;
+    font-size: clamp(0.65rem, 1.2vw, 0.75rem);
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.4rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 1s ease 0.8s, transform 1s ease 0.8s;
+  }
+  body.loaded .hero-eyebrow { opacity: 1; transform: translateY(0); }
+
+  .hero-bismillah {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    letter-spacing: 0.04em;
+    margin-bottom: 1.6rem;
+    opacity: 0;
+    transition: opacity 1s ease 1s;
+  }
+  body.loaded .hero-bismillah { opacity: 1; }
+
+  .hero-names {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(3.6rem, 11vw, 9.5rem);
+    line-height: 0.94;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+  .hero-names .name-first,
+  .hero-names .name-second { display: block; }
+  .hero-names .name-amp {
+    font-size: 0.4em;
+    color: var(--gold);
+    display: inline-block;
+    margin: 0.15em 0.2em;
+  }
+
+  .hero-divider {
+    width: 0px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 2rem auto;
+    transition: width 1.5s cubic-bezier(0.16,1,0.3,1) 1.2s;
+  }
+  body.loaded .hero-divider { width: 150px; }
+
+  .hero-date {
+    font-family: var(--sans);
+    font-weight: 200;
+    font-size: clamp(0.72rem, 1.5vw, 0.88rem);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+    opacity: 0;
+    line-height: 1.9;
+    transition: opacity 1s ease 1.5s;
+  }
+  body.loaded .hero-date { opacity: 1; }
+
+  .scroll-cue {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 1s ease 2s;
+    z-index: 2;
+  }
+  body.loaded .scroll-cue { opacity: 0.5; }
+  .scroll-cue span {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-family: var(--sans);
+    font-weight: 200;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  section { 
+    padding: 8rem 2rem; 
+    position: relative; 
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.15s; }
+  .reveal-delay-2 { transition-delay: 0.3s; }
+  .reveal-delay-3 { transition-delay: 0.45s; }
+  .reveal-delay-4 { transition-delay: 0.6s; }
+
+  .section-label {
+    font-family: var(--sans);
+    font-weight: 200;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 1.5rem;
+  }
+
+  #save-the-date {
+    background: linear-gradient(180deg, var(--ivory) 0%, var(--ivory-dark) 100%);
+    text-align: center;
+    overflow: hidden;
+  }
+  #save-the-date .inner { max-width: 720px; margin: 0 auto; }
+
+  .std-heading {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(2.8rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin-bottom: 1.5rem;
+  }
+  .std-heading em { font-style: italic; color: var(--brown-soft); }
+
+  /* ==================== FIXED DATE SECTION ==================== */
+  .date-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    margin: 3rem 0;
+  }
+  .date-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .date-number {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 6vw, 5rem);     /* Slightly larger for better presence */
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+  .date-label {
+    font-family: var(--sans);
+    font-weight: 300;                         /* Made bolder */
+    font-size: clamp(0.78rem, 2vw, 0.95rem); /* BIGGER & SCALABLE — was 0.6rem */
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--text-muted);                 /* Darker muted color for high contrast */
+    margin-top: 0.5rem;
+    line-height: 1;
+  }
+  .date-sep {
+    width: 1px;
+    height: 68px;                             /* Slightly taller separator */
+    background: linear-gradient(to bottom, transparent, var(--champagne), transparent);
+  }
+
+  .animated-divider {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 2.5rem auto;
+    max-width: 300px;
+  }
+  .animated-divider::before, .animated-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--champagne));
+  }
+  .animated-divider::after {
+    background: linear-gradient(90deg, var(--champagne), transparent);
+  }
+  .divider-diamond {
+    width: 5px;
+    height: 5px;
+    background: var(--gold);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+  }
+
+  #invitation {
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .invitation-text {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1.25rem, 2.3vw, 1.95rem);
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+  }
+  .invitation-text strong {
+    font-weight: 400;
+    color: var(--text-primary);
+  }
+  .invitation-text em {
+    font-style: italic;
+    color: var(--brown-soft);
+  }
+
+  .ornament {
+    font-family: var(--serif);
+    font-size: 2.5rem;
+    color: var(--gold);
+    opacity: 0.4;
+    line-height: 1;
+    display: block;
+    margin: 1.5rem auto;
+  }
+
+  #event-details {
+    background: linear-gradient(180deg, var(--ivory-dark) 0%, var(--ivory) 100%);
+  }
+  #event-details .inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  #event-details .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+  .section-heading {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: 1.1;
+  }
+
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .detail-card {
+    background: rgba(250,247,242,0.72);
+    border: 1px solid rgba(201,169,110,0.2);
+    border-radius: 2px;
+    padding: 2.5rem 2rem;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 24px rgba(138,111,91,0.06), 0 1px 4px rgba(138,111,91,0.04);
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.4s cubic-bezier(0.16,1,0.3,1),
+                border-color 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .detail-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(201,169,110,0.04) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+  .detail-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(138,111,91,0.12), 0 4px 12px rgba(138,111,91,0.08);
+    border-color: rgba(201,169,110,0.4);
+  }
+  .detail-card:hover::before { opacity: 1; }
+
+  .card-icon {
+    font-size: 1.2rem;
+    margin-bottom: 1.2rem;
+    display: block;
+    opacity: 0.7;
+  }
+  .card-type {
+    font-family: var(--sans);
+    font-weight: 200;
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+  .card-title {
+    font-family: var(--serif);
+    font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .card-body {
+    font-family: var(--sans);
+    font-weight: 200;
+    font-size: 0.82rem;
+    line-height: 1.8;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  #reveal {
+    background: linear-gradient(160deg, #f0e6db 0%, #ede0d2 50%, #e8d5c4 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 78vh;
+    padding: 8rem 2rem;
+    overflow: hidden;
+  }
+
+  .reveal-panel {
+    text-align: center;
+    max-width: 680px;
+    position: relative;
+  }
+
+  .reveal-circle {
+    width: 320px;
+    height: 320px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,169,110,0.3);
+    margin: 0 auto 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.6s ease;
+  }
+  .reveal-circle:hover { transform: scale(1.04); }
+  .reveal-circle::before {
+    content: '';
+    position: absolute;
+    inset: 8px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,169,110,0.2);
+    transition: inset 0.6s cubic-bezier(0.16,1,0.3,1);
+  }
+  .reveal-circle:hover::before { inset: 14px; }
+  .reveal-circle::after {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    border: 1px solid rgba(201,169,110,0.1);
+  }
+
+  .reveal-circle-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    z-index: 1;
+  }
+  .reveal-circle-date {
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+  .reveal-circle-month {
+    font-family: var(--sans);
+    font-weight: 200;
+    font-size: 0.7rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .reveal-content {
+    clip-path: inset(0 50% 0 50%);
+    opacity: 0;
+    transition: clip-path 1.2s cubic-bezier(0.16,1,0.3,1), opacity 0.6s ease;
+  }
+  .reveal-content.opened {
+    clip-path: inset(0 0% 0 0%);
+    opacity: 1;
+  }
+
+  .reveal-tagline {
+    font-family: var(--serif);
+    font-size: clamp(1.55rem, 3.5vw, 2.8rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary);
+    line-height: 1.35;
+    margin-bottom: 1rem;
+  }
+  .reveal-sub {
+    font-family: var(--sans);
+    font-size: 0.75rem;
+    font-weight: 200;
+    letter-spacing: 0.18em;
+    color: var(--text-muted);
+    line-height: 1.8;
+  }
+  .reveal-cta-hint {
+    font-family: var(--sans);
+    font-size: 0.62rem;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 2rem;
+    opacity: 0.7;
+  }
+
+  #blessing {
+    background: var(--ivory);
+    text-align: center;
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .blessing-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(228,197,181,0.2) 0%, transparent 65%);
+    animation: blessingPulse 8s ease-in-out infinite;
+  }
+  @keyframes blessingPulse { 0%,100%{opacity:0.5} 50%{opacity:1} }
+
+  .blessing-inner { max-width: 760px; position: relative; z-index: 1; }
+
+  .blessing-quote {
+    font-family: var(--serif);
+    font-size: clamp(1.45rem, 3.4vw, 2.9rem);
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text-primary);
+    margin-bottom: 1.4rem;
+  }
+  .blessing-translit {
+    font-family: var(--sans);
+    font-weight: 300;
+    font-size: clamp(0.88rem, 1.5vw, 1rem);
+    line-height: 2;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+  }
+  .blessing-note {
+    font-family: var(--sans);
+    font-weight: 200;
+    font-size: 0.88rem;
+    line-height: 2;
+    color: var(--text-muted);
+  }
+
+  #closing {
+    background: linear-gradient(180deg, var(--ivory) 0%, #ede3d8 100%);
+    text-align: center;
+    padding: 8rem 2rem 10rem;
+  }
+  #closing .inner { max-width: 640px; margin: 0 auto; }
+
+  .closing-message {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5vw, 4.8rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    line-height: 1.08;
+  }
+  .closing-sub {
+    font-family: var(--sans);
+    font-weight: 200;
+    font-size: 0.84rem;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    margin-bottom: 2.2rem;
+    line-height: 2;
+    text-transform: uppercase;
+  }
+  .closing-note {
+    font-family: var(--serif);
+    font-weight: 300;
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    color: var(--text-secondary);
+    line-height: 1.9;
+  }
+  .closing-names {
+    font-family: var(--serif);
+    font-size: clamp(2.4rem, 5vw, 4.4rem);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--text-primary);
+    margin-top: 4.8rem;
+    opacity: 0.25;
+    letter-spacing: -0.02em;
+  }
+
+  .floral-float {
+    position: absolute;
+    pointer-events: none;
+    opacity: 0.07;
+    animation: floralDrift 20s ease-in-out infinite;
+  }
+  @keyframes floralDrift {
+    0%,100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(3deg); }
+    66% { transform: translateY(10px) rotate(-2deg); }
+  }
+
+  /* ==================== RESPONSIVE FIXES (Date labels now clearly visible) ==================== */
+  @media (max-width: 768px) {
+    section { padding: 5rem 1.5rem; }
+    #hero { min-height: 620px; }
+    .hero-content { padding: 0 1.2rem; }
+    .hero-date { letter-spacing: 0.16em; }
+    .date-display { gap: 1.8rem; }
+    .date-label { font-size: clamp(0.82rem, 2.2vw, 0.98rem); }   /* Even clearer on tablets */
+    .reveal-circle { width: 250px; height: 250px; }
+    .reveal-circle-date { font-size: 2.8rem; }
+    .cards-grid { grid-template-columns: 1fr; }
+    .detail-card { padding: 2rem 1.5rem; }
+    .invitation-text { font-size: clamp(1.15rem, 2.3vw, 1.65rem); }
+    .std-heading { font-size: clamp(2.4rem, 6vw, 4.5rem); }
+    .closing-message { font-size: clamp(2rem, 5vw, 3.8rem); }
+    .reveal-tagline { font-size: clamp(1.35rem, 3.5vw, 2.4rem); }
+  }
+
+  @media (max-width: 480px) {
+    section { padding: 4rem 1rem; }
+    #hero { min-height: 580px; }
+    .hero-content { padding: 0 1rem; }
+    .date-display { 
+      gap: 1.2rem; 
+      flex-wrap: wrap; 
+    }
+    .date-sep { height: 52px; }
+    .date-label { 
+      font-size: clamp(0.85rem, 2.5vw, 1rem);   /* Extra boost for tiny phones */
+      margin-top: 0.4rem;
+    }
+    .date-number { font-size: clamp(2.4rem, 6vw, 3.8rem); }
+    .scroll-cue { bottom: 1.8rem; }
+    .reveal-circle { width: 220px; height: 220px; }
+    .reveal-circle-date { font-size: 2.4rem; }
+    .floral-tl, .floral-br { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<section id="hero">
+  <div class="hero-bg-circle c1"></div>
+  <div class="hero-bg-circle c2"></div>
+  <div class="hero-bg-circle c3"></div>
+
+  <div class="floral-tl">
+    <svg width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g opacity="1">
+        <ellipse cx="60" cy="40" rx="18" ry="28" fill="#c9a96e" transform="rotate(-30 60 40)"/>
+        <ellipse cx="85" cy="20" rx="14" ry="22" fill="#e4c5b5" transform="rotate(-10 85 20)"/>
+        <ellipse cx="40" cy="70" rx="12" ry="20" fill="#dfc08a" transform="rotate(-50 40 70)"/>
+        <ellipse cx="105" cy="45" rx="10" ry="18" fill="#c9a96e" transform="rotate(15 105 45)"/>
+        <ellipse cx="30" cy="100" rx="9" ry="15" fill="#e4c5b5" transform="rotate(-70 30 100)"/>
+        <line x1="60" y1="40" x2="30" y2="100" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/>
+        <line x1="60" y1="40" x2="105" y2="45" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/>
+        <line x1="60" y1="40" x2="85" y2="20" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/>
+        <circle cx="60" cy="40" r="5" fill="#8a6f5b" opacity="0.5"/>
+        <circle cx="85" cy="20" r="4" fill="#8a6f5b" opacity="0.4"/>
+        <circle cx="40" cy="70" r="3.5" fill="#8a6f5b" opacity="0.4"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="floral-br">
+    <svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="70" cy="50" rx="16" ry="26" fill="#c9a96e" transform="rotate(-20 70 50)"/>
+      <ellipse cx="95" cy="30" rx="12" ry="20" fill="#e4c5b5" transform="rotate(5 95 30)"/>
+      <ellipse cx="45" cy="75" rx="11" ry="18" fill="#dfc08a" transform="rotate(-45 45 75)"/>
+      <ellipse cx="110" cy="55" rx="9" ry="16" fill="#c9a96e" transform="rotate(20 110 55)"/>
+      <line x1="70" y1="50" x2="45" y2="75" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/>
+      <line x1="70" y1="50" x2="110" y2="55" stroke="#c9a96e" stroke-width="0.8" opacity="0.5"/>
+      <circle cx="70" cy="50" r="4" fill="#8a6f5b" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <span class="hero-eyebrow">Wedding Invitation</span>
+    <p class="hero-bismillah">In the name of Allah, the Most Gracious, the Most Merciful</p>
+    <h1 class="hero-names">
+      <span class="name-first">S. Sana</span>
+      <span class="name-amp">&amp;</span>
+      <span class="name-second">M. S. Mohamed Najith</span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-date">Sunday, June 7, 2026 &nbsp;·&nbsp; S.P.M Hall, Palli Road, Colachel<br>21 Dhul Hijjah 1447 &nbsp;·&nbsp; Nikkah at 4.00 p.m.</p>
+  </div>
+
+  <div class="scroll-cue">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<section id="save-the-date">
+  <div class="inner">
+    <span class="section-label reveal">Save the Date</span>
+    <h2 class="std-heading reveal reveal-delay-1">
+      A blessed day<br><em>to remember</em>
+    </h2>
+
+    <div class="date-display reveal reveal-delay-2">
+      <div class="date-block">
+        <span class="date-number">07</span>
+        <span class="date-label">Day</span>
+      </div>
+      <div class="date-sep"></div>
+      <div class="date-block">
+        <span class="date-number">June</span>
+        <span class="date-label">Month</span>
+      </div>
+      <div class="date-sep"></div>
+      <div class="date-block">
+        <span class="date-number">2026</span>
+        <span class="date-label">Year</span>
+      </div>
+    </div>
+
+    <div class="animated-divider reveal reveal-delay-3">
+      <div class="divider-diamond"></div>
+    </div>
+
+    <p class="reveal reveal-delay-4" style="font-family: var(--serif); font-size: clamp(1rem,2vw,1.25rem); color: var(--text-muted); font-style: italic; font-weight: 300; line-height: 1.8; max-width: 560px; margin: 0 auto;">
+      “And We Are Created In Pairs”<br>
+      Please keep this day in your prayers and presence.
+    </p>
+  </div>
+</section>
+
+<section id="invitation">
+  <span class="section-label reveal">Invitation</span>
+  <span class="ornament reveal reveal-delay-1">❧</span>
+
+  <p class="invitation-text reveal reveal-delay-1">
+    <em>With gratitude to Allah and with the blessings of family,</em>
+  </p>
+  <p class="invitation-text reveal reveal-delay-2">
+    <strong>Janab. S. Shaik Dawood</strong> &amp; <strong>Janaba. S. Sulthana</strong>
+  </p>
+  <p class="invitation-text reveal reveal-delay-2">
+    cordially solicit your esteemed presence with your family
+  </p>
+  <p class="invitation-text reveal reveal-delay-3">
+    for the <strong>Nikkah</strong> of their beloved daughter
+  </p>
+  <p class="invitation-text reveal reveal-delay-3">
+    <strong>S. Sana</strong>
+  </p>
+  <p class="invitation-text reveal reveal-delay-4">
+    with
+  </p>
+  <p class="invitation-text reveal reveal-delay-4">
+    <strong>M. S. Mohamed Najith</strong>
+  </p>
+
+  <span class="ornament reveal reveal-delay-4" style="font-size:1.5rem; opacity:0.2;">— ✦ —</span>
+
+  <p class="invitation-text reveal reveal-delay-4" style="font-size:clamp(0.95rem,1.5vw,1.12rem); color: var(--text-muted); max-width: 720px; margin-inline:auto;">
+    Sunday, 7 June 2026<br>
+    21 Dhul Hijjah 1447<br>
+    Nikkah at 4.00 p.m.
+  </p>
+
+  <div class="animated-divider reveal reveal-delay-4" style="max-width:220px;">
+    <div class="divider-diamond"></div>
+  </div>
+
+  <p class="invitation-text reveal reveal-delay-4" style="font-size:clamp(0.95rem,1.5vw,1.15rem); max-width: 760px; margin-inline:auto;">
+    <em>S.P.M Hall, Palli Road, Colachel</em><br>
+    Son of Janab. H. Mohamed Babaji and Janaba. Shahitha Beevi
+  </p>
+</section>
+
+<section id="event-details">
+  <div class="inner">
+    <div class="section-header">
+      <span class="section-label reveal">Details</span>
+      <h2 class="section-heading reveal reveal-delay-1">The blessed<br>occasion</h2>
+    </div>
+
+    <div class="cards-grid">
+      <div class="detail-card reveal reveal-delay-1">
+        <span class="card-icon">◈</span>
+        <span class="card-type">Date</span>
+        <h3 class="card-title">Sunday</h3>
+        <p class="card-body">
+          07 June 2026<br>
+          21 Dhul Hijjah 1447
+        </p>
+      </div>
+
+      <div class="detail-card reveal reveal-delay-2">
+        <span class="card-icon">◎</span>
+        <span class="card-type">Ceremony</span>
+        <h3 class="card-title">Nikkah</h3>
+        <p class="card-body">
+          The sacred marriage ceremony<br>
+          begins at 4.00 p.m.
+        </p>
+      </div>
+
+      <div class="detail-card reveal reveal-delay-3">
+        <span class="card-icon">◇</span>
+        <span class="card-type">Venue</span>
+        <h3 class="card-title">S.P.M Hall</h3>
+        <p class="card-body">
+          Palli Road, Colachel<br>
+          Kanyakumari District
+        </p>
+      </div>
+
+      <div class="detail-card reveal reveal-delay-4">
+        <span class="card-icon">✦</span>
+        <span class="card-type">Hosts</span>
+        <h3 class="card-title">Family Invitation</h3>
+        <p class="card-body">
+          Janab. S. Shaik Dawood<br>
+          &amp; Janaba. S. Sulthana<br><br>
+          Best wishes by friends &amp; family
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reveal">
+  <div class="reveal-panel">
+    <span class="section-label reveal" style="text-align:center;">A blessing to unfold</span>
+
+    <div class="reveal-circle" id="revealCircle" onclick="triggerReveal()" role="button" aria-label="Reveal blessing" tabindex="0">
+      <div class="reveal-circle-inner">
+        <span class="reveal-circle-date">07</span>
+        <span class="reveal-circle-month">June · 2026</span>
+      </div>
+    </div>
+
+    <p class="reveal-cta-hint" id="revealHint">Touch to reveal</p>
+
+    <div class="reveal-content" id="revealContent">
+      <h2 class="reveal-tagline">
+        And We Are Created<br>In Pairs
+      </h2>
+      <p class="reveal-sub" style="margin-top:1rem;">
+        MAY THIS UNION BE FILLED WITH MERCY, PEACE, AND BARAKAH
+      </p>
+    </div>
+  </div>
+</section>
+
+<section id="blessing">
+  <div class="blessing-bg"></div>
+
+  <svg class="floral-float" style="width:150px;top:15%;right:8%;" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <ellipse cx="50" cy="30" rx="12" ry="20" fill="#c9a96e" transform="rotate(-15 50 30)"/>
+    <ellipse cx="65" cy="50" rx="10" ry="17" fill="#e4c5b5" transform="rotate(30 65 50)"/>
+    <ellipse cx="35" cy="52" rx="9" ry="15" fill="#dfc08a" transform="rotate(-40 35 52)"/>
+    <circle cx="50" cy="50" r="6" fill="#8a6f5b" opacity="0.4"/>
+    <line x1="50" y1="50" x2="50" y2="30" stroke="#c9a96e" stroke-width="0.7" opacity="0.5"/>
+    <line x1="50" y1="50" x2="65" y2="50" stroke="#c9a96e" stroke-width="0.7" opacity="0.5"/>
+    <line x1="50" y1="50" x2="35" y2="52" stroke="#c9a96e" stroke-width="0.7" opacity="0.5"/>
+  </svg>
+
+  <div class="blessing-inner">
+    <div class="animated-divider reveal" style="max-width:200px; margin-bottom:3rem;">
+      <div class="divider-diamond"></div>
+    </div>
+
+    <blockquote class="blessing-quote reveal reveal-delay-1">
+      Baarakallahu laka wa baaraka 'alayka wa jama'a baynakuma fee khayr
+    </blockquote>
+
+    <p class="blessing-translit reveal reveal-delay-2">
+      May Allah bless you, shower His blessings upon you, and join you together in goodness.
+    </p>
+
+    <p class="blessing-note reveal reveal-delay-3">
+      We warmly invite you to join us, offer your prayers, and share in this joyful beginning.
+    </p>
+
+    <div class="animated-divider reveal reveal-delay-4" style="max-width:200px; margin-top:3rem;">
+      <div class="divider-diamond"></div>
+    </div>
+  </div>
+</section>
+
+<section id="closing">
+  <div class="inner">
+    <span class="section-label reveal">With Duas</span>
+    <h2 class="closing-message reveal reveal-delay-1">Your presence and prayers<br>mean so much to us</h2>
+    <p class="closing-sub reveal reveal-delay-2">Sunday, June 7, 2026 · S.P.M Hall · Colachel</p>
+    <p class="closing-note reveal reveal-delay-3">
+      We look forward to sharing this blessed occasion with you and your family.
+    </p>
+    <div class="closing-names reveal reveal-delay-4">S. Sana &amp; M. S. Mohamed Najith</div>
+  </div>
+</section>
+
+<script>
+  window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+    initScrollAnimations();
+    initScrollProgress();
+    initParallax();
+  });
+
+  function initScrollProgress() {
+    const bar = document.getElementById('scrollProgress');
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (window.scrollY / h * 100) + '%';
+    });
+  }
+
+  function initScrollAnimations() {
+    const els = document.querySelectorAll('.reveal');
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          obs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    els.forEach(el => obs.observe(el));
+  }
+
+  function initParallax() {
+    window.addEventListener('scroll', () => {
+      const sy = window.scrollY;
+      const c1 = document.querySelector('.hero-bg-circle.c1');
+      const c2 = document.querySelector('.hero-bg-circle.c2');
+      const c3 = document.querySelector('.hero-bg-circle.c3');
+      if (c1) c1.style.transform = `translate(0, ${sy * 0.15}px)`;
+      if (c2) c2.style.transform = `translate(0, ${sy * -0.1}px)`;
+      if (c3) c3.style.transform = `translate(0, ${sy * 0.08}px)`;
+    });
+  }
+
+  let revealed = false;
+  function triggerReveal() {
+    if (revealed) return;
+    revealed = true;
+    const content = document.getElementById('revealContent');
+    const hint = document.getElementById('revealHint');
+    const circle = document.getElementById('revealCircle');
+    hint.style.opacity = '0';
+    circle.style.transform = 'scale(0.92)';
+    circle.style.opacity = '0.65';
+    setTimeout(() => {
+      content.classList.add('opened');
+    }, 400);
+  }
+
+  document.getElementById('revealCircle').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      triggerReveal();
+    }
+  });
+
+  document.addEventListener('mousemove', e => {
+    const xd = (e.clientX / window.innerWidth - 0.5) * 20;
+    const yd = (e.clientY / window.innerHeight - 0.5) * 20;
+    const content = document.querySelector('.hero-content');
+    if (content) {
+      content.style.transform = `translate(${xd * 0.18}px, ${yd * 0.18}px)`;
+    }
+  });
+</script>
+</body>
+</html>
