@@ -20,7 +20,7 @@
     --brown-soft: #8a6f5b;
     --text-primary: #2c2118;
     --text-secondary: #6b5744;
-    --text-muted: #8a6f5b;          /* FIXED: Darker for better contrast on all backgrounds */
+    --text-muted: #8a6f5b;          /* Already fixed for visibility */
     --serif: 'Cormorant Garamond', Georgia, serif;
     --sans: 'Jost', sans-serif;
   }
@@ -41,7 +41,7 @@
     position: fixed;
     inset: 0;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-    opacity: 0.35;                    /* Slightly reduced for cleaner text readability */
+    opacity: 0.35;
     pointer-events: none;
     z-index: 1000;
   }
@@ -263,6 +263,7 @@
   }
   .std-heading em { font-style: italic; color: var(--brown-soft); }
 
+  /* ==================== FIXED DATE SECTION ==================== */
   .date-display {
     display: flex;
     align-items: center;
@@ -277,23 +278,24 @@
   }
   .date-number {
     font-family: var(--serif);
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-size: clamp(2.8rem, 6vw, 5rem);     /* Slightly larger for better presence */
     font-weight: 300;
     color: var(--text-primary);
     line-height: 1;
   }
   .date-label {
     font-family: var(--sans);
-    font-weight: 200;
-    font-size: 0.6rem;
+    font-weight: 300;                         /* Made bolder */
+    font-size: clamp(0.78rem, 2vw, 0.95rem); /* BIGGER & SCALABLE — was 0.6rem */
     letter-spacing: 0.35em;
     text-transform: uppercase;
-    color: var(--text-muted);
-    margin-top: 0.4rem;
+    color: var(--text-muted);                 /* Darker muted color for high contrast */
+    margin-top: 0.5rem;
+    line-height: 1;
   }
   .date-sep {
     width: 1px;
-    height: 60px;
+    height: 68px;                             /* Slightly taller separator */
     background: linear-gradient(to bottom, transparent, var(--champagne), transparent);
   }
 
@@ -438,7 +440,7 @@
     font-weight: 200;
     font-size: 0.82rem;
     line-height: 1.8;
-    color: var(--text-muted);           /* Now clearly visible */
+    color: var(--text-muted);
     letter-spacing: 0.02em;
   }
 
@@ -536,7 +538,7 @@
     font-size: 0.75rem;
     font-weight: 200;
     letter-spacing: 0.18em;
-    color: var(--text-muted);            /* Now clearly visible */
+    color: var(--text-muted);
     line-height: 1.8;
   }
   .reveal-cta-hint {
@@ -593,7 +595,7 @@
     font-weight: 200;
     font-size: 0.88rem;
     line-height: 2;
-    color: var(--text-muted);            /* Now clearly visible */
+    color: var(--text-muted);
   }
 
   #closing {
@@ -617,7 +619,7 @@
     font-weight: 200;
     font-size: 0.84rem;
     letter-spacing: 0.14em;
-    color: var(--text-muted);            /* Now clearly visible */
+    color: var(--text-muted);
     margin-bottom: 2.2rem;
     line-height: 2;
     text-transform: uppercase;
@@ -652,13 +654,14 @@
     66% { transform: translateY(10px) rotate(-2deg); }
   }
 
-  /* ==================== FULLY RESPONSIVE IMPROVEMENTS ==================== */
+  /* ==================== RESPONSIVE FIXES (Date labels now clearly visible) ==================== */
   @media (max-width: 768px) {
-    section { padding: 5rem 1.5rem; }                 /* Smaller vertical padding */
+    section { padding: 5rem 1.5rem; }
     #hero { min-height: 620px; }
     .hero-content { padding: 0 1.2rem; }
     .hero-date { letter-spacing: 0.16em; }
-    .date-display { gap: 1.3rem; }
+    .date-display { gap: 1.8rem; }
+    .date-label { font-size: clamp(0.82rem, 2.2vw, 0.98rem); }   /* Even clearer on tablets */
     .reveal-circle { width: 250px; height: 250px; }
     .reveal-circle-date { font-size: 2.8rem; }
     .cards-grid { grid-template-columns: 1fr; }
@@ -670,15 +673,23 @@
   }
 
   @media (max-width: 480px) {
-    section { padding: 4rem 1rem; }                   /* Extra tight for very small phones */
+    section { padding: 4rem 1rem; }
     #hero { min-height: 580px; }
     .hero-content { padding: 0 1rem; }
-    .date-display { gap: 1rem; flex-wrap: wrap; }
-    .date-sep { height: 45px; }
+    .date-display { 
+      gap: 1.2rem; 
+      flex-wrap: wrap; 
+    }
+    .date-sep { height: 52px; }
+    .date-label { 
+      font-size: clamp(0.85rem, 2.5vw, 1rem);   /* Extra boost for tiny phones */
+      margin-top: 0.4rem;
+    }
+    .date-number { font-size: clamp(2.4rem, 6vw, 3.8rem); }
     .scroll-cue { bottom: 1.8rem; }
     .reveal-circle { width: 220px; height: 220px; }
     .reveal-circle-date { font-size: 2.4rem; }
-    .floral-tl, .floral-br { display: none; }        /* Clean up decorative SVGs on tiny screens */
+    .floral-tl, .floral-br { display: none; }
   }
 </style>
 </head>
@@ -1005,7 +1016,6 @@
     }
   });
 
-  // Subtle mouse parallax on hero (works on desktop & tablets)
   document.addEventListener('mousemove', e => {
     const xd = (e.clientX / window.innerWidth - 0.5) * 20;
     const yd = (e.clientY / window.innerHeight - 0.5) * 20;
